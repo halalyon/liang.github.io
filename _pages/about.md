@@ -1,56 +1,121 @@
----
-permalink: /
-title: "Academic Pages is a ready-to-fork GitHub Pages template for academic personal websites"
-author_profile: true
-redirect_from: 
-  - /about/
-  - /about.html
----
+李 昂								
+个人资料： 1990年8月18日出生，来自天津，南开大学本科以及悉尼大学硕士学历。
+联系方式： 微信：halalyon 邮箱：halalyon@gmail.com 手机：(+86) 13820607538   
 
-This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the repository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. Incidentally, these same features make it a great template for anyone that needs to show off a professional template!
+教育背景
+悉尼大学	信息科学专业硕士	Oct 2014-Jul 2016
+主修方向：数据库管理；相关课程：数据挖掘，云计算，数据库管理，移动计算，信号与健康，进阶数据结构，IT项目管理，边缘计算, 深度学习
+南开大学 软件工程专业本科	Sep 2009-Jul 2013
+主修方向：软件工程开发；相关课程：数据结构与算法设计，计算机图形学等	
 
- You can fork [this template](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and Markdown files, add your own PDFs and other content, and have your own site for free, with no ads!
+主要项目研发经验
+DriveVLM数据挖掘项目
+项目简介：Drive VLM包括视觉Transformer编码器和大语言模型（LLM）。视觉编码器产生图像tokens, 基于注意的提取器将这些tokens与LLM对齐, 最后LLM执行场景描述、场景分析和分层规划。设计prompt提示词产生需要的输出。
+参与点：
+•	挖掘施工场景绕道，公交车道变道，上下高架桥导航偏移的场景
+•	挖掘直行左转违规变道，自车频繁超车的场景
+4DBEV真值车数据采集项目：
+项目简介：负责点云、6V图像、里程计信息等车端数据链路畅通，完成时间同步、相机点云内外参数的校正等一系列数据准备工作，负责点云云端前景检测pipeline和6路相机云端前景检测pipeline，以及负责两个传感器前景检测后处理匹配的工作。
+  
+4D BEV真值车数据采集项目pipeline   								   时间同步策略
+ <img width="264" height="124" alt="image" src="https://github.com/user-attachments/assets/52117c0a-0eb7-4942-a9b9-914a44d889a8" />
+ <img width="539" height="116" alt="image" src="https://github.com/user-attachments/assets/c6266e1f-2377-4eb2-acab-a0bd5a1573a2" />
 
-A data-driven personal website
-======
-Like many other Jekyll-based GitHub Pages templates, Academic Pages makes you separate the website's content from its form. The content & metadata of your website are in structured Markdown files, while various other files constitute the theme, specifying how to transform that content & metadata into HTML pages. You keep these various Markdown (.md), YAML (.yml), HTML, and CSS files in a public GitHub repository. Each time you commit and push an update to the repository, the [GitHub pages](https://pages.github.com/) service creates static HTML pages based on these files, which are hosted on GitHub's servers free of charge.
+真值车点云感知模块
+参与点：
+•	点云感知模块，detzero框架中替换为DSVT+连续帧跟踪，去掉refine模块
+•	BEV融合模块，融合纯视觉BEV结果
+•	后处理2D、3D匹配模块
+2D、3D匹配后处理架构的目的是为了融合2D和3D的最终结果，利用各个传感器的优势，输出最终的结果。匹配模块包括，输入模块，数据读取，反向跟踪，障碍物级别运动补偿，投影过滤，遮挡过滤，截断，2D/3D匹配，匹配稳定性判断，类别平滑，盲区补盲，以及最终输出。
+最终真值车数据参考指标
+  
+纯视觉和点云视觉多模态模型训练
+使用真值车产生的后融合真值数据训练纯视觉BEV和多模态模型，纯视觉模型一开始使用BevFormer结构，（通过空间和时序的transformer产生BEV空间的特征做可变形注意力，获得查询后的特征后使用回归网络预测偏移量，更新参考点）预测鸟瞰图下的障碍物位置信息，后期迭代升级为Sparse4D架构，不仅能够提升指标，还可以扩展为端到端的跟踪模型；多模态模型从BevFusion到TransFusion到最后使用的CMT模型，CMT（在 CMT 中，对象查询直接同时与多模态特征交互。将位置编码PE添加到多模态特征中以进行对齐）
+的鲁棒性比其他现有方法强得多，在 LiDAR 未命中的情况下，与那些基于视觉的 3D 物体检测器相比，仅使用图像标记的 CMT 可以实现相似的性能。
+参与点：
+•	BevFormer模型训练
+•	多模态模型训练
+众包车数据挖掘和修复
+使用点云-图像多模态模型（或者纯视觉模型）对量产车回传的数据进行预刷，找到云端和车端感知有异常的场景并加以解决
+数据挖掘需求
+•	120m+远距离感知漏检、跳变
+•	极近处行人漏检
+•	拥挤场景行人漏检
+•	大卡车位置尺寸跳变
+点云车端感知系统(Perception-lidar)
+项目简介：点云感知上车，以百度的appollo感知系统作为框架，搭建属于自己的点云感知系统，主要由几大模块构成：preprocess, segmentation, recognition, tracking, filtering, fail safe等模块构成，其中segmentation模块是并行处理的，因为分割和检测需要cuda做并行计算，其余各模块均为串行。得到的感知结果通过dds发送到下游单位，下游包括融合，EID等需求方。
+参与点：
+•	Preprocess地面检测算法Ransac；
+•	tracking跟踪算法（匹配+滤波）；
+•	感知结果可视化；
+3D点云图片联合标注平台（MUSE）
+项目简介：需求是将采集车上返回的激光雷达和6路摄像头的数据，使用半人工的方式标注点云和图像3D的障碍物；主要原理是通过点云3D障碍物模型检测出的3D bounding box，投影到和点云时间同步好的2D图像上，这样再通过人工干预的的方式就可以得到3D点云标注和3D图像标注；联合标注平台可以使用连续帧的方式，对多目标障碍物进行跟踪
+参与点：
+•	3D点云检测模型（车和人AP均在80P%以上）P；
+•	点云到图像投影；
+•	点云内外参校准工具；
+•	多目标追踪；
+3D点云生产平台
+项目简介：通过激光雷达反射回来的激光点云拼接一幅完整的点云图像，然后对拼接之后的点云图像进行运动补偿，运动补偿使用CUDA加速；将压缩的点云包按照规定协议解除单帧供数据使用方进行使用。
+参与点：
+•	点云生产（生产速度约1秒1帧）；
+•	点云补偿以及CUDA加速（CPU补偿700ms每帧，CUDA加速补偿30ms每帧，点云点数平均90万点）
+工况识别与视频数据脱敏
+项目简介：目的是对数据采集车上采集的视频进行分类，主要分类是天气、场景、光照条件等工况；视频脱敏的目的是根据国家法律禁止向数据使用方提供带有人脸和车牌号的使用数据，识别出车牌照和人脸后对其进行马赛克处理
+参与点：
+•	工况识别分类（分类模型准确度AP90%）；
+•	车牌人脸识别（项目时间紧张没有统计，大部分情况都是准确的）
+驾仓疾控防疫模块
+项目简介：目的是通过车内安装的体温计和全阵列麦克风，分别检测车上学员体温和识别车上学员的咳嗽声音
+参与点：
+•	咳嗽识别（二分类识别准确率85%）
+方向盘手势识别、教练学员肢体接触识别：
+项目简介：通过车辆内部中置的摄像头对直拍方向盘，监控学员打方向盘的动作，能够识别出学员左、右手打方向盘，双手打方向盘，双手离开方向盘，交叉手打方向盘，并及时提醒学员按照正常手势打方向盘。同时使用计算机视觉算法判断教练学员是否有肢体接触，并通过车载端软件语音进行播报。
+参与点：
+•	方向盘手势识别（可以判断左右手单手握方向盘、双手握方向盘、双手离开方向盘）
+•	肢体接触识别（二分类准确度95%）	
 
-Many of the features of dynamic content management systems (like Wordpress) can be achieved in this fashion, using a fraction of the computational resources and with far less vulnerability to hacking and DDoSing. You can also modify the theme to your heart's content without touching the content of your site. If you get to a point where you've broken something in Jekyll/HTML/CSS beyond repair, your Markdown files describing your talks, publications, etc. are safe. You can rollback the changes or even delete the repository and start over - just be sure to save the Markdown files! You can also write scripts that process the structured data on the site, such as [this one](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb) that analyzes metadata in pages about talks to display [a map of every location you've given a talk](https://academicpages.github.io/talkmap.html).
+工作经验
+理想汽车研发中心                                                                                                         				Jul. 2020 – Aug. 2024
+4DBEV动态障碍物检测项目：
+使用真值车采集好的连续帧数据训练BEVformer方法，通过时空transformer学习BEV特征，模型指标城市白天车辆（iou0.5）双90%、行人（iou0.3）双70%、骑行人（iou0.3）双85%
+4DBEV数据采集项目：
+负责点云、6V图像、里程计信息等车端数据链路畅通，完成时间同步、相机点云内外参数的校正等一系列数据准备工作，负责真值车标定参数动态手调和云端监测，负责点云云端前景检测pipeline和6路相机云端前景检测pipeline，负责两个传感器前景检测匹配的工作，负责障碍物降维匹配、跟踪、遮挡、截断、类别平滑、2d only反投影补盲等后处理类数据工作。
+激光雷达车端点云感知系统：负责激光雷达点云感知系统的前处理地面检测、跟踪、fail safe 检测以及最后的点云结果可视化工作。
+1.	稳定的地面检测非常关键，影响之后的过滤功能，地面检测主要分为三步：前处理、筛选面片、外推面片；
+2.	稳定的跟踪模块依然重要，决定了后面语义地图跟踪图层，跟踪包含：匈牙利匹配、卡尔曼滤波以及测量速度加速度等步骤；
+3.	Fail safe模块目前会将一些点云不好处理的问题囊括在内，比如遇到雨雪天气会行车点云的漫反射，对于异常的点云进行禁用，直到点云正常为止；
+4.	可视化模块将整个点云感知的结果可视化出来，方便debug和展示；
+激光雷达3D点云生产平台以及障碍物检测：负责激光雷达点云生产时的补偿以及加速过程，以及点云3D障碍物检测。
+点云运动补偿的需要三次大规模针对每个点的计算，
+1.	开始时刻根据起始点方位角从Lidar点云坐标系转换IMU坐标系的第一次transform；
+2.	根据运动时间差对x轴，y轴，z轴的旋转变换；
+3.	结束时刻从IMU坐标系转回到Lidar点云坐标系的第二次transform
+点云3D障碍物检测方法使用PVRCNN二阶段模型，融合anchor base和center base两种方法，使用3D数据增强的方式增多样本数目，修补盲区障碍物，使用样本平衡策略过滤负样本的数目，使用多头输出检测区域内障碍物类别，中心点，size，heading，后处理阶段使用BEV nms算法过滤重复检测框。模型指标机动车准召95%、行人骑行人准召80%（iou0.5），中心点误差和size的90分位误差在0.1m至0.2m内。
+行车工况识别：行车工况包括道路场景检测（高速，城市城快，乡村，隧道，桥梁，停车场，加油站），天气检测（雨天，雪天，阴晴天，雾霾天），光照条件检测（逆光，强光，弱光，自然光）以及白天黑夜区分。使用resnet50+多header的模式完成，多头训练使用轮询的规律，损失函数使用SigmoidFocalLoss，平衡数量少的样本。后期加入天气预报API用于后处理过程，加强结果的准确性，推理时间控制在每帧30ms，准确率90%。
+行车视频数据脱敏：对视频中的人脸或者车牌打上马赛克，人脸和车牌检测采用RetinaNet的方式，采用MobileNet+FPN+SSH+SSD密集采样的方式对人脸和车牌进行检测，损失函数使用FocalLoss最大化的降低样本不平衡对模型产生的影响。使用NVDIADRIVEWORK2.2车辆检测做车辆样本的筛选，减小路牌和广告牌被误识别的概率。数据集采用开源数据集车牌数据集CCPD2019+人脸数据集wideFace+理想内部数据集。精确率95%，召回率95%，推理时间每帧30毫秒，采用batchsize推理，一个900帧的视频推理速度在10秒以内，根据显卡显存大小可控制时间。
+NVIDIA DRIVEWORK项目开发包：DRIVEWORK开发包包括车辆行人自行车，车道线，路面标识，红绿灯，电线杆等基本物体的检测，稳定性好，速度快，网络模型小支持多并发等优点，所有使用DRIVEWORK+BOOSTPYTHON转写成python的package，并用此做模型的前处理或者后处理。
 
-For those users that need more advanced functionality, the template also supports the following popular tools:
-- [MathJax](https://www.mathjax.org/) for mathematical equations
-- [Mermaid](https://mermaid.js.org/) for diagraming
-- [Plotly](https://plotly.com/javascript/) for plotting
+北京易显智能科技有限责任公司                                                                                                         Jul. 2019 – Jul. 2020
+北京易显智能科技有限责任公司是一家依托驾校制作人工智能教练的上游企业，致力于运用全智能语音人机交互前沿技术研发RoboCoach机器人教练，开创了基于驾驶人行为大数据的智能驾培生态系统。我在其中作为人工智能、机器学习工程师，参与了公司机器人教练5.0版本的智能项目。
+人脸登录、头部位姿识别、情绪识别：使用python既用作人工智能算法的训练，又用于真实的生产环境研发，提供接口。使用头部位姿识别监测学员做科目二时，是否有左右看后视镜的行为，监控学员是否经常低头看档位。情绪识别用于监控学员在练车过程中的情绪变化，并写入车载端驾驶行为数据中。项目均使用开源项目+自定义数据训练，改善车载端的识别效果，同时在车载端部署服务器，为车载端的练车软件提供接口。
+驾驶行为数据接口服务：使用python对学员驾驶行为的数据进行分析。数据200ms产生于车载客户端，主要记录车辆的GPS数据，方向盘角度，档位，离合值，油门值，发动机转速值等车辆运行状态。通过数学分析学员对车辆主要模块的操作情况，预测学员练习坡道起步、倒车入库、侧方位停车、曲线行驶、直角转弯等科目是否能成功，如果不能成功，及时提醒学员错误在哪里。还可以通过手机APP给出学员驾驶情况的雷达图。
+防疫疾控模块：疾控模块包括体温识别和咳嗽声音的识别，在车载端后视镜上加装体温感应模块，并且在车载工控机上面部署咳嗽识别程序。我主要负责咳嗽识别的流程，咳嗽识别代码由20层的卷积神经网络组成，并使用分类器SVM对计算出的Mel频率对数坐标进行分类。训练数据一开始由自然声音组成，后期加入人说话的语音，以及车载端的噪音，使得识别效果更加精准，识别准确率达到90%。
+方向盘手势识别、教练学员肢体接触识别：通过车辆内部中置的摄像头对直拍方向盘，监控学员打方向盘的动作，能够识别出学员左、右手打方向盘，双手打方向盘，双手离开方向盘，交叉手打方向盘，并及时提醒学员按照正常手势打方向盘。同时使用计算机视觉算法判断教练学员是否有肢体接触，并通过车载端软件语音进行播报。
 
-Getting started
-======
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this template](https://github.com/academicpages/academicpages.github.io) by clicking the "Use this template" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](https://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
+启迪桑德新环卫资源股份有限责任公司											      Apr. 2018 – Jun.2019
+启迪桑德集团是集投资、研发、咨询、设计、建设、运营、制造、绿色金融于一体，可提供全面的、可持续发展的“一站式”环境服务及整体解决方案。涉及到的项目包括环卫云，水务云，新能源，智能环卫车辆解决方案的研发。我参与过人脸识别，垃圾物体识别等人工智能项目，也参与过公司成本以及大数据分析的项目。
 
-Site-wide configuration
-------
-The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
+国家超级计算天津中心									                                       Nov. 2017 – Apr. 2018
+这是一个立足天津市的国家级事业单位，主要业务包括：为国家级应用提供计算及存储空间；建设自身大数据平台和研发云应用。我在单位担任系统工程师的职位，主要负责天津滨海新区工业云平台的研发工作。包括使用开源项目开发工业云网盘系统；开发仿真渲染云前端与对接数据；接手工业云管理后台，继续开发后台提供市场数据分析功能。
+天津滨海工业云项目：天津滨海工业云项目涉及，企业上云，提供应用产品的运营。例如工业互联网企业上云支持，BIM云，仿真渲染云，矿业云，石油云等工业云应用的设计及研发。我在项目中参与前端页面的建设；后端服务器数据的对接工作；参与数据接口的编写；参与消息队列的建设工作
 
-Create content & metadata
-------
-For site content, there is one Markdown file for each type of content, which are stored in directories like _publications, _talks, _posts, _teaching, or _pages. For example, each talk is a Markdown file in the [_talks directory](https://github.com/academicpages/academicpages.github.io/tree/master/_talks). At the top of each Markdown file is structured data in YAML about the talk, which the theme will parse to do lots of cool stuff. The same structured data about a talk is used to generate the list of talks on the [Talks page](https://academicpages.github.io/talks), each [individual page](https://academicpages.github.io/talks/2012-03-01-talk-1) for specific talks, the talks section for the [CV page](https://academicpages.github.io/cv), and the [map of places you've given a talk](https://academicpages.github.io/talkmap.html) (if you run this [python file](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.py) or [Jupyter notebook](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb), which creates the HTML for the map based on the contents of the _talks directory).
 
-**Markdown generator**
-
-The repository includes [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-) that converts a CSV containing structured data about talks or presentations into individual Markdown files that will be properly formatted for the Academic Pages template. The sample CSVs in that directory are the ones I used to create my own personal website at stuartgeiger.com. My usual workflow is that I keep a spreadsheet of my publications and talks, then run the code in these notebooks to generate the Markdown files, then commit and push them to the GitHub repository.
-
-How to edit your site's GitHub repository
-------
-Many people use a git client to create files on their local computer and then push them to GitHub's servers. If you are not familiar with git, you can directly edit these configuration and Markdown files directly in the github.com interface. Navigate to a file (like [this one](https://github.com/academicpages/academicpages.github.io/blob/master/_talks/2012-03-01-talk-1.md) and click the pencil icon in the top right of the content preview (to the right of the "Raw | Blame | History" buttons). You can delete a file by clicking the trashcan icon to the right of the pencil icon. You can also create new files or upload files by navigating to a directory and clicking the "Create new file" or "Upload files" buttons. 
-
-Example: editing a Markdown file for a talk
-![Editing a Markdown file for a talk](/images/editing-talk.png)
-
-For more info
-------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/), the [growing wiki](https://github.com/academicpages/academicpages.github.io/wiki), and you can always [ask a question on GitHub](https://github.com/academicpages/academicpages.github.io/discussions). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+个人专利
+1.	一种基于众包采集的视频场景打标流程  提案号 CHJ2010002569CN01
+2.	一种大规模点云运动补偿并行加速方案  提案号 CHJ2109003541CN01  
+3.	一种基于Ransac的点云地面提取算法 提案号 CHJ2207006882
+4.	一种三维八点框转换二维四点框的方法 提案号 CHJ2311003085
+5.	基于自动标注数据集计算障碍物截断的方法 提案号 CHJ2401000133
+6.	基于真值车系统激光雷达和相机硬触发同步的障碍物运动补偿方法
+<img width="539" height="764" alt="image" src="https://github.com/user-attachments/assets/a6049c03-c66b-490b-b2d9-3489bfda9abe" />
