@@ -1,3 +1,11 @@
+---
+permalink: /
+title: "About"
+author_profile: true
+redirect_from: 
+  - /about/
+  - /about.html
+---
 李 昂								
 个人资料： 1990年8月18日出生，来自天津，南开大学本科以及悉尼大学School of IT硕士学历。
 联系方式： 微信：halalyon 邮箱：halalyon@gmail.com 手机：(+86) 13820607538   
