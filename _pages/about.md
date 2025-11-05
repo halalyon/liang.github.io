@@ -7,16 +7,19 @@ redirect_from:
   - /about.html
 ---
 李 昂								
+
 个人资料： 1990年8月18日出生，来自天津，南开大学本科以及悉尼大学School of IT硕士学历。
 联系方式： 微信：halalyon 邮箱：halalyon@gmail.com 手机：(+86) 13820607538   
 
 教育背景
+
 悉尼大学	信息科学专业硕士	Oct 2014-Jul 2016
 主修方向：数据库管理；相关课程：数据挖掘，云计算，数据库管理，移动计算，信号与健康，进阶数据结构，IT项目管理，边缘计算, 深度学习
 南开大学 软件工程专业本科	Sep 2009-Jul 2013
 主修方向：软件工程开发；相关课程：数据结构与算法设计，计算机图形学等	
 
 主要项目研发经验
+
 3DGS世界模型与VLA、DriveVLM
 纯视觉和点云视觉多模态模型训练
 点云车端感知系统(Perception-lidar)
@@ -24,6 +27,7 @@ redirect_from:
 3D点云生产平台
 
 工作经验
+
 理想汽车研发中心                                                                                                         				  Jul. 2020 – Aug. 2024
 北京易显智能科技有限责任公司                                                                                                         Apr. 2018 – Jul. 2020
 国家超级计算天津中心									                                                                                              Nov. 2017 – Apr. 2018
@@ -35,6 +39,7 @@ redirect_from:
 4.	一种三维八点框转换二维四点框的方法 提案号 CHJ2311003085
 5.	基于自动标注数据集计算障碍物截断的方法 提案号 CHJ2401000133
 6.	基于真值车系统激光雷达和相机硬触发同步的障碍物运动补偿方法
+
 
 **Ang Li**
 
@@ -90,8 +95,3 @@ Nov 2017 – Apr 2018
 4.  A Method for Converting 3D Eight-Point Boxes to 2D Four-Point Boxes Proposal No.: CHJ2311003085
 5.  A Method for Calculating Obstruction Truncation Based on Auto-Labeled Datasets Proposal No.: CHJ2401000133
 6.  An Obstacle Motion Compensation Method Based on Hardware Trigger Synchronization of Truth Vehicle System LiDAR and Camera
-
-
-
-个人简历
-<img width="539" height="764" alt="image" src="https://github.com/user-attachments/assets/a6049c03-c66b-490b-b2d9-3489bfda9abe" />
